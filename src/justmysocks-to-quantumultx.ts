@@ -1,14 +1,14 @@
-const { $resource, $done, $notify } =
-  typeof window === 'object' &&
-  (window as Window &
-    typeof globalThis & {
-      $notify: (title: string, subtitle?: string, message?: string) => any;
-      $resource: { content: string };
-      $done: (data: { content: string }) => any;
-    });
+const { $resource, $done, $notify } = (
+  typeof window === 'object' ? window : {}
+) as {
+  $notify: (title: string, subtitle?: string, message?: string) => any;
+  $resource: { content: string };
+  $done: (data: { content: string }) => any;
+};
 
 if ($resource) {
-  $notify('Start');
+  // @TODO test
+  // $notify('Start');
 
   const content = transform($resource.content);
 
@@ -16,7 +16,8 @@ if ($resource) {
     content,
   });
 
-  $notify('Complete!', '', content);
+  // @TODO test
+  // $notify('Complete!', '', content);
 }
 
 export function transform(content: string): string {
