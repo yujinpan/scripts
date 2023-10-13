@@ -27,10 +27,11 @@ export function transform(content: string): string {
     .filter((item) => !!item);
 
   return data
-    .map((item) =>
-      Object.entries(item)
-        .map(([key, val]) => `${key}=${val}`)
-        .join(', '),
+    .map(
+      (item) =>
+        Object.entries(item)
+          .map(([key, val]) => `${key}=${val}`)
+          .join(', ') + ';',
     )
     .join('\n');
 }
