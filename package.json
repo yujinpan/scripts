@@ -5,8 +5,8 @@
   "scripts": {
     "publish:beta": "npm version prerelease --preid=beta",
     "publish:patch": "npm version patch",
-    "version": "npm run build",
-    "postversion": "git add lib/* && git push --all && git push --tags",
+    "version": "npm run build && git add lib/*",
+    "postversion": "git push --all && git push --tags",
     "build": "rollupx",
     "test": "jest"
   },
