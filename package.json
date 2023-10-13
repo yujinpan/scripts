@@ -6,7 +6,7 @@
     "publish:beta": "npm version prerelease --preid=beta",
     "publish:patch": "npm version patch",
     "version": "npm run build",
-    "postversion": "git push --all && git push --tags",
+    "postversion": "git add lib/* && git push --all && git push --tags",
     "build": "rollupx",
     "test": "jest"
   },
