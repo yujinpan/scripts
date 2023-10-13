@@ -5,6 +5,8 @@ const { $resource, $done, $notify } = Function('return this')() as {
 };
 
 if ($resource) {
+  $notify('Start');
+
   const content = transform($resource.content);
 
   $done({
