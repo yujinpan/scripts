@@ -1,24 +1,4 @@
-const { $resource, $done, $notify } = (
-  typeof window === 'object' ? window : {}
-) as {
-  $notify: (title: string, subtitle?: string, message?: string) => any;
-  $resource: { content: string };
-  $done: (data: { content: string }) => any;
-};
-
-if ($resource) {
-  // @TODO test
-  // $notify('Start');
-
-  const content = transform($resource.content);
-
-  $done({
-    content,
-  });
-
-  // @TODO test
-  // $notify('Complete!', '', content);
-}
+import 'core-js/stable/atob.js';
 
 export function transform(content: string): string {
   const data: Server[] = readBase64(content)
@@ -87,10 +67,5 @@ function readJson(json: string) {
 }
 
 function readBase64(base64: string) {
-  return new TextDecoder().decode(base64ToBytes(base64));
-}
-
-function base64ToBytes(base64: string) {
-  const binString = atob(base64);
-  return Uint8Array.from(binString, (m) => m.codePointAt(0));
+  return atob(base64);
 }
