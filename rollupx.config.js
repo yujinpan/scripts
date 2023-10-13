@@ -3,6 +3,7 @@ module.exports = {
     '/*!\n' +
     ` * scripts ${require('./package.json').version}\n` +
     ` * (c) 2023-${new Date().getFullYear()}\n` +
+    ` * Rep: https://github.com/yujinpan/scripts\n` +
     ' */\n',
 
   aliasConfig: {
