@@ -14,7 +14,7 @@ module.exports = {
 
   formats: [
     {
-      format: 'cjs',
+      format: 'iife',
       inputFiles: ['**/*'],
       outputDir: 'lib',
       outputFile: '[name][ext]',
