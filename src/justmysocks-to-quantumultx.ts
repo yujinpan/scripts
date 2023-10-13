@@ -1,12 +1,17 @@
-const { $resource, $done } = Function('return this')() as {
+const { $resource, $done, $notify } = Function('return this')() as {
+  $notify: (title: string, subtitle?: string, message?: string) => any;
   $resource: { content: string };
   $done: (data: { content: string }) => any;
 };
 
 if ($resource) {
+  const content = transform($resource.content);
+
   $done({
-    content: transform($resource.content),
+    content,
   });
+
+  $notify('Complete!', '', content);
 }
 
 export function transform(content: string): string {
@@ -27,11 +32,10 @@ export function transform(content: string): string {
     .filter((item) => !!item);
 
   return data
-    .map(
-      (item) =>
-        Object.entries(item)
-          .map(([key, val]) => `${key}=${val}`)
-          .join(', ') + ';',
+    .map((item) =>
+      Object.entries(item)
+        .map(([key, val]) => `${key}=${val}`)
+        .join(', '),
     )
     .join('\n');
 }
