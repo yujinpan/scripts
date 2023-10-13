@@ -1,6 +1,6 @@
 {
   "name": "scripts",
-  "version": "1.0.1-beta.4",
+  "version": "1.0.1-beta.5",
   "description": "some scripts.",
   "scripts": {
     "publish:beta": "npm version prerelease --preid=beta",
