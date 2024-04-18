@@ -1,16 +1,29 @@
 import 'core-js/stable/atob.js';
 
-export function transform(content: string): string {
+type Resource = {
+  link: string;
+  content: string;
+};
+
+export function transform(resource: Resource): string {
+  const { link, content } = resource;
+
+  const upd = readUdpRelay(link);
+
   const data: Server[] = readBase64(content)
     .split('\n')
     .map((item) => {
       const [protocol, infos] = item.split('://');
 
       try {
-        return {
+        const result: Server = {
           ss: readShadowsocks,
           vmess: readVmess,
         }[protocol]?.(infos);
+
+        if (upd) result['udp-relay'] = true;
+
+        return result;
       } catch (e) {
         //
       }
@@ -32,6 +45,7 @@ type Server = {
   method: string;
   password: string;
   tag: string;
+  'udp-relay'?: boolean;
 };
 
 function readVmess(str: string): Server {
@@ -56,6 +70,11 @@ function readShadowsocks(str: string): Server {
     password,
     tag,
   };
+}
+
+// http://test.com?udp = > true
+function readUdpRelay(link: string) {
+  return link.split('?')[1]?.includes('udp');
 }
 
 function readJson(json: string) {

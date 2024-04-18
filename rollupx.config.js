@@ -18,7 +18,7 @@ module.exports = {
 /**!justmysocks-to-quantumultx ${require('./package.json').version}
 Rep: https://github.com/yujinpan/scripts
 */`.trim(),
-      footer: `$done({ content: JMS2QUX.transform($resource.content) });`,
+      footer: `$done({ content: JMS2QUX.transform($resource) });`,
       format: 'iife',
       inputFiles: ['justmysocks-to-quantumultx.ts'],
       outputName: 'JMS2QUX',
