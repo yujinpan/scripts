@@ -33,6 +33,7 @@ export function transform(resource: Resource): string {
   return data
     .map((item) =>
       Object.entries(item)
+        .filter(([, val]) => !!val)
         .map(([key, val]) => `${key}=${val}`)
         .join(', '),
     )
@@ -46,16 +47,18 @@ type Server = {
   password: string;
   tag: string;
   'udp-relay'?: boolean;
+  obfs?: 'over-tls';
 };
 
 function readVmess(str: string): Server {
-  const { ps, port, id, add } = readJson(readBase64(str));
+  const { ps, port, id, add, tls } = readJson(readBase64(str));
 
   return {
     vmess: `${add}:${port}`,
     method: 'aes-128-gcm',
     password: id,
     tag: ps,
+    obfs: tls === 'tls' ? 'over-tls' : undefined,
   };
 }
 
