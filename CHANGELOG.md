@@ -1,3 +1,9 @@
+## [1.0.4](https://github.com/yujinpan/scripts/compare/v1.0.3...v1.0.4) (2024-08-15)
+
+### Features
+
+- set encryption `chacha20-poly1305` to default with vmess ([b35d59d](https://github.com/yujinpan/scripts/commit/b35d59d35d66b68cefbb2754b940a267b1f9305a))
+
 ## [1.0.3](https://github.com/yujinpan/scripts/compare/v1.0.2...v1.0.3) (2024-07-02)
 
 ## [1.0.2](https://github.com/yujinpan/scripts/compare/v1.0.1...v1.0.2) (2024-07-02)
