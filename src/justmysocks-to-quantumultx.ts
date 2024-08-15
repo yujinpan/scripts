@@ -9,6 +9,7 @@ export function transform(resource: Resource): string {
   const { link, content } = resource;
 
   const upd = readUdpRelay(link);
+  const aes = readAES(link);
 
   const data: Server[] = readBase64(content)
     .split('\n')
@@ -19,7 +20,7 @@ export function transform(resource: Resource): string {
         const result: Server = {
           ss: readShadowsocks,
           vmess: readVmess,
-        }[protocol]?.(infos);
+        }[protocol]?.(infos, aes);
 
         if (upd) result['udp-relay'] = true;
 
@@ -50,12 +51,12 @@ type Server = {
   obfs?: 'over-tls';
 };
 
-function readVmess(str: string): Server {
+function readVmess(str: string, aes = false): Server {
   const { ps, port, id, add, tls } = readJson(readBase64(str));
 
   return {
     vmess: `${add}:${port}`,
-    method: 'aes-128-gcm',
+    method: aes ? 'aes-128-gcm' : 'chacha20-poly1305',
     password: id,
     tag: ps,
     obfs: tls === 'tls' ? 'over-tls' : undefined,
@@ -78,6 +79,11 @@ function readShadowsocks(str: string): Server {
 // http://test.com?udp = > true
 function readUdpRelay(link: string) {
   return link.split('?')[1]?.includes('udp');
+}
+
+// http://test.com?aes = > true
+function readAES(link: string) {
+  return link.split('?')[1]?.includes('aes');
 }
 
 function readJson(json: string) {
