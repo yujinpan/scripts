@@ -28,7 +28,7 @@ jobs:
           cp -rf lib/qx-excluded-routes.txt ./
           
           git add justmysocks-to-quantumultx.js qx-excluded-routes.txt
-          git commit -m 'Updated at $(date)"
+          git commit -m "Updated at $(date)"
 
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
