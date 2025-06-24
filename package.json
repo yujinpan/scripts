@@ -5,7 +5,7 @@
   "scripts": {
     "publish:beta": "release-ops beta --publish=false",
     "publish:patch": "release-ops patch --publish=false",
-    "build": "rollupx && git add lib/justmysocks-to-quantumultx.js",
+    "build": "rollupx && node gen-config.js",
     "test": "jest"
   },
   "author": "yujinpan",
