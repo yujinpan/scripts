@@ -1,0 +1,38 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 22 * * *'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+      - run: npm i
+      - name: Build
+        run: npm run build
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git checkout release
+          
+          cp -rf lib/justmysocks-to-quantumultx.js ./
+          cp -rf lib/qx-excluded-routes.txt ./
+          
+          git add justmysocks-to-quantumultx.js qx-excluded-routes.txt
+          git commit -m 'Updated at $(date)"
+
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release
+          force: true
