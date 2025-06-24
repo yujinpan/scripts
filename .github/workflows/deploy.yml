@@ -22,7 +22,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          git checkout release
+          git checkout -b release
           
           cp -rf lib/justmysocks-to-quantumultx.js ./
           cp -rf lib/qx-excluded-routes.txt ./
