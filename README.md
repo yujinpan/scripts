@@ -2,14 +2,17 @@
 
 Some Scripts.
 
-## Subscribes Transform
-
-### JustMySocks to QuantumultX
+## JustMySocks to QuantumultX
 
 https://raw.githubusercontent.com/yujinpan/scripts/refs/heads/release/justmysocks-to-quantumultx.js
 
-## QuantumultX Excluded Routes
+## Direct skip proxy in QuantumultX
+
+- `dns_exclusion_list` skip dns resolve
+- `excludes_routes` exclude ip
 
 https://raw.githubusercontent.com/yujinpan/scripts/refs/heads/release/qx-excluded-routes.txt
 
-> Source: https://github.com/yujinpan/scripts/tree/main/src
+> By skipping the domain name and IP to bypass VPN, 
+> the copying and parsing of direct connection data is eliminated 
+> and directly handed over to the system for processing to reduce consumption.

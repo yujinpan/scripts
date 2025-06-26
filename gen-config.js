@@ -12,7 +12,8 @@ async function run() {
     fs.mkdirSync('lib');
   }
   const file = 'https://raw.githubusercontent.com/yujinpan/scripts/refs/heads/release/qx-excluded-routes.txt';
-  const banner = `China Direct Skip Proxy, Last updated: ${new Date().toLocaleString()}\n;By skipping the domain name and IP to bypass VPN, the copying and parsing of direct connection data is eliminated and directly handed over to the system for processing to reduce consumption.\n;Source: ${file}`;
+  const description = 'By skipping the domain name and IP to bypass VPN, the copying and parsing of direct connection data is eliminated and directly handed over to the system for processing to reduce consumption.';
+  const banner = `China Direct Skip Proxy, Last updated: ${new Date().toLocaleString()}\n;${description}\n;Source: ${file}`;
   fs.writeFileSync('lib/qx-excluded-routes.txt', `;${banner}\n${directDomains}\n${directIp}`, {
     encoding: 'utf8',
     flag: 'w',
