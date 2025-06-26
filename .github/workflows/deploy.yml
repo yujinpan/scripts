@@ -22,12 +22,12 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          git checkout -b release
+          git checkout --orphan release
+          git rm -rf .
           
-          cp -rf lib/justmysocks-to-quantumultx.js ./
-          cp -rf lib/qx-excluded-routes.txt ./
+          cp -rf lib/* .
           
-          git add justmysocks-to-quantumultx.js qx-excluded-routes.txt
+          git add .
           git commit -m "Updated at $(date)"
 
       - name: GitHub Push
