@@ -3,6 +3,7 @@ server=/*.cn
 
 # Allow Apple access and Geoip will check again
 server=/*.apple.com
+server=/*.safebrowsing.apple
 
 # Google
 server=/www.googletagmanager.com
