@@ -23,9 +23,10 @@ jobs:
           git config --local user.name "GitHub Action"
           
           git checkout --orphan release
-          git rm -rf .
+          find . -maxdepth 1 -not -name '.git' -not -name 'lib' -exec rm -rf {} +
           
           cp -rf lib/* .
+          rm -rf lib
           
           git add .
           git commit -m "Updated at $(date)"
