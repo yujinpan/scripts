@@ -40,20 +40,21 @@ async function excludedRoutes() {
 }
 
 async function exclusionDNSDomains() {
-  let result = [
-    '*.cmpassport.com',
-    '*.jegotrip.com.cn',
-    '*.icitymobile.mobi',
-    'id6.me',
-    '*.cn',
-  ];
+  let result = readDomainFromServers(fs.readFileSync('./config/whitelist.txt').toString());
 
-  const url = 'https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/refs/heads/main/Rules/Region/China.list';
+  const url = 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/QuantumultX/China/China.list';
   const list = await fetch(url).then((res) => res.text());
   list.split('\n').forEach(item => {
     const [hostType, domain] = item.split(',');
-    if (hostType === 'host-suffix') {
+    switch (hostType) {
+    case 'HOST':
+    case 'HOST-KEYWORD':
+    case 'HOST-WILDCARD':
+      result.push(domain)
+      break;
+    case 'HOST-SUFFIX':
       result.push(`*.${domain}`)
+      break;
     }
   });
 
@@ -95,7 +96,11 @@ async function appleAndGoogleDomainsCN(url, url2) {
   const list = await Promise.all(
     [url, url2].map(item => fetch(item).then(res => res.text()))
   ).then((res) => res.join('\n'));
-  return list.split('\n').map(item => {
+  return readDomainFromServers(list);
+}
+
+function readDomainFromServers(servers) {
+  return servers.split('\n').map(item => {
     return item.split('/')[1]
   }).filter(item => !!item);
 }

@@ -1,0 +1,14 @@
+# Common
+server=/*.cn
+
+# Allow Apple access and Geoip will check again
+server=/*.apple.com
+
+# Google
+server=/www.googletagmanager.com
+server=/www.googleadservices.com
+server=/www.google-analytics.com
+server=/*.doubleclick.net
+
+# CDN
+server=/*.qtlcdn.com
